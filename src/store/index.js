@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-// import example from './module-example'
+import categoria from './categoria'
 
 Vue.use(Vuex)
 
@@ -17,7 +17,24 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      // example
+      categoria
+    },
+    state: {
+      token: localStorage.getItem('token_API_FACTURACION') || sessionStorage.getItem('token_API_FACTURACION'),
+      leftDrawer: true,
+      rightDrawer: false
+    },
+
+    mutations: {
+      SET_IS_LOGGED_IN (state, isLoggedIn) {
+        state.isLoggedIn = isLoggedIn
+      },
+      SET_LEFT_DRAWER (state, leftDrawer) {
+        state.leftDrawer = leftDrawer
+      },
+      SET_RIGHT_DRAWER (state, rightDrawer) {
+        state.rightDrawer = rightDrawer
+      }
     },
 
     // enable strict mode (adds overhead!)

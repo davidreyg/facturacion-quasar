@@ -53,6 +53,10 @@ module.exports = function (ctx) {
       all: 'auto',
 
       components: [
+        'QTable',
+        'QTh',
+        'QTr',
+        'QTd',
         'QLayout',
         'QHeader',
         'QDrawer',
@@ -68,8 +72,7 @@ module.exports = function (ctx) {
         'QItemLabel',
         'QAjaxBar',
         'QBanner',
-        'QSpinner',
-        'QMarkupTable'
+        'QSpinner'
       ],
 
       directives: ['Ripple'],
@@ -89,11 +92,11 @@ module.exports = function (ctx) {
       env: ctx.dev
         ? {
           // so on dev we'll have
-          API: JSON.stringify('https://dev.api.com')
+          BASE_API_URL: JSON.stringify('http://facturacionapi.dev.com/api/v1')
         }
         : {
           // and on build (production):
-          API: JSON.stringify('https://prod.api.com')
+          BASE_API_URL: JSON.stringify('https://prod.api.com')
         },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'

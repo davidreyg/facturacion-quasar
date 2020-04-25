@@ -1,8 +1,12 @@
-import store from './store'
-import
+import store from '../store'
+import Auth from '../pages/auth/Auth'
+import Login from '../pages/auth/Login'
+import Register from '../pages/auth/Register'
+import Categoria from '../pages/categoria/Categoria'
 
 const beforeEnter = (to, from, next) => {
-  if (store.state.token) {
+  // console.log(store().state)
+  if (store().state.token) {
     next({ path: '/' })
   } else {
     console.log(to, from)
@@ -14,8 +18,20 @@ const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
+    meta: { auth: true, title: 'Inicio' },
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      {
+        path: '',
+        component: () => import('pages/Index.vue'),
+        meta: { auth: true, title: 'Inicio' }
+      },
+      {
+        path: 'categorias',
+        name: 'home.categorias',
+        component: Categoria,
+        meta: { auth: true, title: 'Categorias' }
+
+      }
     ]
   },
   {
@@ -30,7 +46,6 @@ const routes = [
         component: Login,
         meta: { title: 'Login' },
         beforeEnter: (to, from, next) => beforeEnter(to, from, next)
-
       },
       {
         path: 'register',
