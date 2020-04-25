@@ -13,8 +13,15 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "@websanova/vue-auth": "^3.1.2-beta",
     "axios": "^0.18.1",
-    "quasar": "^1.0.0"
+    "quasar": "^1.0.0",
+    "vee-validate": "^3.3.0",
+    "vue-api-query": "^1.5.1",
+    "vue-axios": "^2.1.5",
+    "vue-currency-input": "^1.18.2",
+    "vue-sweetalert2": "^3.0.3",
+    "vuex-map-fields": "^1.4.0"
   },
   "devDependencies": {
     "@quasar/app": "^1.0.0",

@@ -11,7 +11,7 @@
 export default {
   name: 'PageIndex',
   mounted () {
-    console.log(process.env.VUE_ROUTER_MODE)
+    console.log(process.env.API)
   }
 }
 </script>
