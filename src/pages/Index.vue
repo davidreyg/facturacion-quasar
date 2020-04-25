@@ -6,10 +6,6 @@
 
 <script>
 export default {
-  name: 'PageIndex',
-  mounted () {
-    console.log(process.env.API)
-    this.$swal('Hello Vue world!!!')
-  }
+  name: 'PageIndex'
 }
 </script>
