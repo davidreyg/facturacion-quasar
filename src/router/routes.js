@@ -9,7 +9,7 @@ const beforeEnter = (to, from, next) => {
   if (store().state.token) {
     next({ path: '/' })
   } else {
-    console.log(to, from)
+    // console.log(to, from)
   }
   next()
 }

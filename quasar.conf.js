@@ -96,7 +96,7 @@ module.exports = function (ctx) {
         }
         : {
           // and on build (production):
-          BASE_API_URL: JSON.stringify('https://prod.api.com')
+          BASE_API_URL: JSON.stringify('http://facturacionapi.dev.com/api/v1')
         },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'

@@ -38,11 +38,11 @@ export function openModalEditar ({ commit }, payload) {
 export function storeCategoria (context, payload) {
   CategoriaRepository.create(payload)
     .then(() => {
-      // Notify.create({
-      //   position: 'top-right',
-      //   textColor: 'white',
-      //   message: 'Creado.'
-      // });
+      Notify.create({
+        position: 'top-right',
+        textColor: 'white',
+        message: 'Creado.'
+      })
       context.dispatch('fetchCategorias')
       context.dispatch('openModalCrear', false)
     })
@@ -53,12 +53,12 @@ export function storeCategoria (context, payload) {
 export function updateCategoria (context, payload) {
   CategoriaRepository.update(payload)
     .then(res => {
-      console.log(res)
-      // Notify.create({
-      //   position: 'top-right',
-      //   textColor: 'white',
-      //   message: 'Actualizado.'
-      // })
+      // console.log(res)
+      Notify.create({
+        position: 'top-right',
+        textColor: 'white',
+        message: 'Actualizado.'
+      })
       context.dispatch('fetchCategorias')
       context.dispatch('openModalEditar', false)
       context.commit('SET_CATEGORIA', {})
@@ -70,7 +70,7 @@ export function updateCategoria (context, payload) {
 export function deleteCategoria (context, payload) {
   CategoriaRepository.destroy(payload)
     .then(res => {
-      console.log(res)
+      // console.log(res)
       Notify.create({
         position: 'top-right',
         textColor: 'white',

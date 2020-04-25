@@ -88,7 +88,7 @@ export default {
         })
         .catch(err => {
           this.loading = false
-          console.error(err.response.data)
+          // console.error(err.response.data)
           this.$q.notify({
             type: 'negative',
             textColor: 'white',
