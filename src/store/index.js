@@ -21,7 +21,7 @@ export default function (/* { ssrContext } */) {
     },
     state: {
       token: localStorage.getItem('token_API_FACTURACION') || sessionStorage.getItem('token_API_FACTURACION'),
-      leftDrawer: true,
+      leftDrawer: false,
       rightDrawer: false
     },
 

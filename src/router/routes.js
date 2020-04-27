@@ -3,6 +3,7 @@ import Auth from '../pages/auth/Auth'
 import Login from '../pages/auth/Login'
 import Register from '../pages/auth/Register'
 import Categoria from '../pages/categoria/Categoria'
+import Tienda from '../pages/tienda/Tienda'
 
 const beforeEnter = (to, from, next) => {
   // console.log(store().state)
@@ -32,7 +33,15 @@ const routes = [
         meta: { auth: true, title: 'Categorias' }
 
       }
+
     ]
+  },
+  {
+    path: '/tienda',
+    name: 'tienda',
+    component: Tienda,
+    meta: { auth: true, title: 'Comprar Productos' }
+
   },
   {
     path: '/auth',

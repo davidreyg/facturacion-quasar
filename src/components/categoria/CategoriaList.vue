@@ -160,8 +160,12 @@ export default {
   },
   async created () {
     this.loading = true
+    this.$q.loading.show({
+      delay: 400 // ms
+    })
     await this.fetchCategorias()
     this.loading = false
+    this.$q.loading.hide()
   },
   methods: {
     // listarCategorias();
@@ -170,7 +174,7 @@ export default {
     ...mapActions('categoria', ['openModalCrear']),
     ...mapActions('categoria', ['deleteCategoria']),
     eliminarCategoria (categoria) {
-      console.log(categoria)
+      // console.log(categoria)
       this.$swal.fire({
         title: `¿Esta seguro de eliminar la categoria ${categoria.nombre}?`,
         html: '<span style="color:red">¡No podra revertir esta acción!</span>',

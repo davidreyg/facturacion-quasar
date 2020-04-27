@@ -78,7 +78,7 @@ module.exports = function (ctx) {
       directives: ['Ripple'],
 
       // Quasar plugins
-      plugins: ['Notify']
+      plugins: ['Notify', 'Loading']
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
@@ -96,7 +96,7 @@ module.exports = function (ctx) {
         }
         : {
           // and on build (production):
-          BASE_API_URL: JSON.stringify('http://facturacionapi.dev.com/api/v1')
+          BASE_API_URL: JSON.stringify('https://facturacion26042020.herokuapp.com/api/v1')
         },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
@@ -133,7 +133,7 @@ module.exports = function (ctx) {
 
     // animations: 'all', // --- includes all animations
     // https://quasar.dev/options/animations
-    animations: [],
+    animations: 'all',
 
     // https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {

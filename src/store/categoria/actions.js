@@ -72,14 +72,14 @@ export function deleteCategoria (context, payload) {
     .then(res => {
       // console.log(res)
       Notify.create({
-        position: 'top-right',
+        position: 'bottom-right',
         textColor: 'white',
         message: 'Categoria eliminada correctamente.'
       })
       context.dispatch('fetchCategorias')
     })
     .catch(err => {
-      console.error(err.response)
+      // console.error(err.response)
       Notify.create({
         type: 'negative',
         textColor: 'white',
