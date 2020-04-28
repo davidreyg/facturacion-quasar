@@ -15,6 +15,7 @@
     "@quasar/extras": "^1.6.4",
     "@websanova/vue-auth": "^3.1.2-beta",
     "axios": "^0.18.1",
+    "dinero.js": "^1.8.1",
     "quasar": "^1.9.14",
     "vee-validate": "^3.3.0",
     "vue-api-query": "^1.5.1",
