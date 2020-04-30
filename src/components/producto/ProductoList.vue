@@ -1,13 +1,13 @@
 <template>
   <q-table
     dense
+    :loading="loading"
     :grid="$q.screen.xs"
     title="Productos"
     :data="getProductos"
     :columns="columns"
     row-key="name"
     :filter="filter"
-    :loading="loading"
     :visible-columns="visibleColumns"
   >
     <template v-slot:top-right>
@@ -68,7 +68,8 @@
           icon="edit"
           no-caps
           dense
-          @click="fetchOneProducto(props.row.id)"
+          @click="cargarProducto(props.row.id)"
+          :loading="loadingBtnFetch"
         />
         <q-btn
           outline
@@ -146,6 +147,7 @@ export default {
   data () {
     return {
       loading: false,
+      loadingBtnFetch: false,
       filter: '',
       visibleColumns: ['nombre', 'descripcion', 'categoria', 'stock', 'action'],
       columns: [
@@ -169,6 +171,7 @@ export default {
     }
   },
   async created () {
+    // alert('sd')
     this.loading = true
     await this.fetchProductos()
     this.loading = false
@@ -177,6 +180,13 @@ export default {
     // listarCategorias();
     ...mapActions('producto', ['fetchProductos']),
     ...mapActions('producto', ['fetchOneProducto']),
+    async cargarProducto (id) {
+      const evt = window.event
+      console.log(evt)
+      this.loadingBtnFetch = true
+      await this.fetchOneProducto(id)
+      this.loadingBtnFetch = false
+    },
     ...mapActions('producto', ['openModalCrear']),
     ...mapActions('producto', ['deleteProducto']),
     eliminarProducto (producto) {

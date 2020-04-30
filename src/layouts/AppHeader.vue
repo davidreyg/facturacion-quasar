@@ -11,7 +11,7 @@
 
       <q-toolbar-title>
         <q-avatar>
-          <img :src="require('../assets/quasar-logo.svg')" />
+          <img src="statics/img/quasar-logo.svg" />
         </q-avatar>
         Facturacion con Laravel
       </q-toolbar-title>

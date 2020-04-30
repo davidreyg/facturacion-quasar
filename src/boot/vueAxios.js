@@ -3,7 +3,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import { Model } from 'vue-api-query'
 
-const asd = axios.create({
+/* TODO : ASDASD */
+export const baseAxios = axios.create({
   baseURL: process.env.BASE_API_URL,
   headers: {
     'Content-Type': 'application/json'
@@ -12,9 +13,9 @@ const asd = axios.create({
 })
 export default ({ Vue }) => {
   // something to do
-  const httpClient = asd
+  const httpClient = baseAxios
   Model.$http = httpClient
   Vue.use(VueAxios, httpClient)
 }
 
-Vue.prototype.$axios = asd
+Vue.prototype.$axios = baseAxios

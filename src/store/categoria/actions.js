@@ -1,8 +1,8 @@
 import { Notify } from 'quasar'
 import { RepositoryFactory } from '../../repositories/RepositoryFactory'
 const CategoriaRepository = RepositoryFactory.get('categorias')
-export function fetchCategorias ({ commit }) {
-  CategoriaRepository.get()
+export async function fetchCategorias ({ commit }) {
+  await CategoriaRepository.get()
     .then(categorias => {
       // console.log(categorias.data);
       commit('SET_CATEGORIAS', categorias.data)
@@ -16,8 +16,8 @@ export function fetchCategorias ({ commit }) {
     })
 }
 
-export function fetchOneCategoria (context, payload) {
-  CategoriaRepository.getOne(payload)
+export async function fetchOneCategoria (context, payload) {
+  await CategoriaRepository.getOne(payload)
     .then((categoria) => {
       // console.log(categoria);
       context.dispatch('openModalEditar', true)
@@ -35,8 +35,8 @@ export function openModalEditar ({ commit }, payload) {
   commit('SET_MODAL_EDITAR_ABIERTO', payload)
 }
 
-export function storeCategoria (context, payload) {
-  CategoriaRepository.create(payload)
+export async function storeCategoria (context, payload) {
+  await CategoriaRepository.create(payload)
     .then(() => {
       Notify.create({
         position: 'top-right',
@@ -50,8 +50,8 @@ export function storeCategoria (context, payload) {
       console.error(err)
     })
 }
-export function updateCategoria (context, payload) {
-  CategoriaRepository.update(payload)
+export async function updateCategoria (context, payload) {
+  await CategoriaRepository.update(payload)
     .then(res => {
       // console.log(res)
       Notify.create({
@@ -67,8 +67,8 @@ export function updateCategoria (context, payload) {
       console.error(err)
     })
 }
-export function deleteCategoria (context, payload) {
-  CategoriaRepository.destroy(payload)
+export async function deleteCategoria (context, payload) {
+  await CategoriaRepository.destroy(payload)
     .then(res => {
       // console.log(res)
       Notify.create({

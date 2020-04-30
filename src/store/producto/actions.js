@@ -1,9 +1,8 @@
-import Vue from 'vue'
 import { Notify } from 'quasar'
 import { RepositoryFactory } from '../../repositories/RepositoryFactory'
 const ProductoRepository = RepositoryFactory.get('productos')
-export function fetchProductos ({ commit }) {
-  ProductoRepository.get()
+export async function fetchProductos ({ commit }) {
+  await ProductoRepository.get()
     .then(productos => {
       // console.log(Productos.data);
       commit('SET_PRODUCTOS', productos.data)
@@ -17,8 +16,8 @@ export function fetchProductos ({ commit }) {
     })
 }
 
-export function fetchOneProducto (context, payload) {
-  ProductoRepository.getOne(payload)
+export async function fetchOneProducto (context, payload) {
+  await ProductoRepository.getOne(payload)
     .then((producto) => {
       // console.log(Producto);
       context.dispatch('openModalEditar', true)
@@ -36,28 +35,25 @@ export function openModalEditar ({ commit }, payload) {
   commit('SET_MODAL_EDITAR_ABIERTO', payload)
 }
 
-export function storeProducto (context, payload) {
+export async function storeProducto (context, payload) {
   console.log(payload)
-  Vue.$axios
-    .post('http://localhost:8081/product', payload)
-    .then(res => context.commit('setNewProductToState', res.data)) // assuming your response payload is in a data object
 
-  // ProductoRepository.create(payload)
-  //   .then(() => {
-  //     Notify.create({
-  //       position: 'top-right',
-  //       textColor: 'white',
-  //       message: 'Creado.'
-  //     })
-  //     context.dispatch('fetchProductos')
-  //     context.dispatch('openModalCrear', false)
-  //   })
-  //   .catch(err => {
-  //     console.error(err)
-  //   })
+  await ProductoRepository.create(payload)
+    .then(() => {
+      Notify.create({
+        position: 'top-right',
+        textColor: 'white',
+        message: 'Creado.'
+      })
+      context.dispatch('fetchProductos')
+      context.dispatch('openModalCrear', false)
+    })
+    .catch(err => {
+      console.error(err)
+    })
 }
-export function updateProducto (context, payload) {
-  ProductoRepository.update(payload)
+export async function updateProducto (context, payload) {
+  await ProductoRepository.update(payload)
     .then(res => {
       // console.log(res)
       Notify.create({
@@ -73,8 +69,8 @@ export function updateProducto (context, payload) {
       console.error(err)
     })
 }
-export function deleteProducto (context, payload) {
-  ProductoRepository.destroy(payload)
+export async function deleteProducto (context, payload) {
+  await ProductoRepository.destroy(payload)
     .then(res => {
       // console.log(res)
       Notify.create({

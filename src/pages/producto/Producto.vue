@@ -12,12 +12,12 @@
       persistent
     >
       <q-card style="width: 700px; max-width: 80vw;">
-        <q-card-section class="q-pa-none">
-          <div class="row wrap">
-            <div class="col col-12 items-center q-pa-none">
-              <producto-editar-form></producto-editar-form>
-            </div>
-          </div>
+        <q-card-section class="bg-primary text-white">
+          <div class="text-h6">Actualizar Producto</div>
+          <div class="text-subtitle3">Los campos con (*) son obligatorios</div>
+        </q-card-section>
+        <q-card-section class="col-12 full-width">
+          <producto-editar-form></producto-editar-form>
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -26,12 +26,13 @@
       persistent
     >
       <q-card style="width: 700px; max-width: 80vw;">
-        <q-card-section class="q-pa-none">
-          <div class="row wrap">
-            <div class="col col-12 items-center q-pa-none">
-              <producto-crear-form></producto-crear-form>
-            </div>
-          </div>
+        <q-card-section class="bg-primary text-white">
+          <div class="text-h6">Nuevo Producto</div>
+          <div class="text-subtitle3">Los campos con (*) son obligatorios</div>
+        </q-card-section>
+        <q-separator />
+        <q-card-section class="col-12 full-width">
+          <producto-crear-form></producto-crear-form>
         </q-card-section>
       </q-card>
     </q-dialog>

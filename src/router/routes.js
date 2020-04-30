@@ -1,10 +1,4 @@
 import store from '../store'
-import Auth from '../pages/auth/Auth'
-import Login from '../pages/auth/Login'
-import Register from '../pages/auth/Register'
-import Categoria from '../pages/categoria/Categoria'
-import Producto from '../pages/producto/Producto'
-import Tienda from '../pages/tienda/Tienda'
 
 const beforeEnter = (to, from, next) => {
   // console.log(store().state)
@@ -30,14 +24,14 @@ const routes = [
       {
         path: 'categorias',
         name: 'home.categorias',
-        component: Categoria,
+        component: () => import('pages/categoria/Categoria.vue'),
         meta: { auth: true, title: 'Categorias' }
 
       },
       {
         path: 'productos',
         name: 'home.productos',
-        component: Producto,
+        component: () => import('pages/producto/Producto.vue'),
         meta: { auth: true, title: 'Productos' }
 
       }
@@ -47,26 +41,26 @@ const routes = [
   {
     path: '/tienda',
     name: 'tienda',
-    component: Tienda,
+    component: () => import('pages/tienda/Tienda.vue'),
     meta: { auth: true, title: 'Comprar Productos' }
 
   },
   {
     path: '/auth',
     name: 'auth',
-    component: Auth,
+    component: () => import('pages/auth/Auth.vue'),
     redirect: '/auth/login',
     children: [
       {
         path: 'login',
         name: 'auth.login',
-        component: Login,
+        component: () => import('pages/auth/Login.vue'),
         meta: { title: 'Login' },
         beforeEnter: (to, from, next) => beforeEnter(to, from, next)
       },
       {
         path: 'register',
-        component: Register,
+        component: () => import('pages/auth/Register.vue'),
         meta: { title: 'Registro' },
         beforeEnter: (to, from, next) => beforeEnter(to, from, next)
       }

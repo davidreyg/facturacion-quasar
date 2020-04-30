@@ -66,7 +66,7 @@
     </q-scroll-area>
     <q-img
       class="absolute-top"
-      :src="require('../assets/material.png')"
+      src="statics/img/material.png"
       style="height: 150px"
     >
       <div class="absolute-bottom bg-transparent">
@@ -74,7 +74,7 @@
           size="56px"
           class="q-mb-sm"
         >
-          <img :src="require('../assets/boy-avatar.png')" />
+          <img src="statics/img/boy-avatar.png" />
         </q-avatar>
         <div class="text-weight-bold">
           Bienvenido {{ this.$auth.user().username }}

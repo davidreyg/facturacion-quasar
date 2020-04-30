@@ -1,4 +1,6 @@
+import Repository from './Repository'
 import Producto from '../models/Producto'
+const resource = '/productos'
 export default {
   get () {
     return Producto.get()
@@ -9,12 +11,14 @@ export default {
   },
 
   create (payload) {
-    const producto = new Producto(payload)
-    return producto.save()
+    // const producto = new Producto(payload)
+    // return producto.save()
+    console.log(payload)
+    return Repository.post(`${resource}`, payload)
   },
   update (payload) {
     const producto = new Producto(payload)
-    return producto.save()
+    producto.save()
   },
 
   destroy (producto) {

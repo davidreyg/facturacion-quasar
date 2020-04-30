@@ -3,7 +3,7 @@
     <q-toolbar>
       <q-toolbar-title>
         <q-avatar>
-          <img :src="require('../assets/quasar-logo.svg')" />
+          <img src="statics/img/quasar-logo.svg" />
         </q-avatar>
         Title
       </q-toolbar-title>
