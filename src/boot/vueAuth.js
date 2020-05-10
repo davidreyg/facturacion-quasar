@@ -22,6 +22,10 @@ export default ({ Vue, router }) => {
       method: 'GET',
       enabled: true,
       interval: 30
+    },
+    loginData: {
+      url: 'auth/login',
+      method: 'POST'
     }
   })
 }

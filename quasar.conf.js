@@ -6,7 +6,7 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
-
+const path = require('path')
 module.exports = function (ctx) {
   console.log(ctx)
   return {
@@ -21,6 +21,13 @@ module.exports = function (ctx) {
       'vueAuth',
       'veeValidate'
     ],
+
+    sourceFiles: {
+      rootComponent: 'src/core/App.vue',
+      router: 'src/core/Router',
+      store: 'src/core/Store',
+      indexHtmlTemplate: 'src/core/index.template.html'
+    },
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: ['app.sass'],
@@ -124,6 +131,13 @@ module.exports = function (ctx) {
             formatter: require('eslint').CLIEngine.getFormatter('stylish')
           }
         })
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias, // This adds the existing alias
+
+          // Add your own alias like this
+          core: path.resolve(__dirname, './src/core'),
+          modules: path.resolve(__dirname, './src/modules')
+        }
       }
     },
 
