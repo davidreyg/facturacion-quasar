@@ -3,7 +3,7 @@
 
     <!-- <transition
       appear
-      enter-active-class="animated xdxd fadeIn"
+      enter-active-class="animated :v fadeIn"
       leave-active-class="animated fadeOut"
     > -->
     <q-ajax-bar
