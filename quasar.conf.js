@@ -17,7 +17,7 @@ module.exports = function (ctx) {
       'axios',
       'vueAxios',
       'sweetAlert',
-      'VueCurrencyInput',
+      'vueCurrencyInput',
       'vueAuth',
       'veeValidate'
     ],
@@ -95,7 +95,7 @@ module.exports = function (ctx) {
       env: ctx.dev
         ? {
           // so on dev we'll have
-          BASE_API_URL: JSON.stringify('http://facturacionapi.dev.com/api/v1')
+          BASE_API_URL: JSON.stringify('http://facturaloya.test/api')
         }
         : {
           // and on build (production):
