@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 
 export default {
   name: 'AppLeftDrawer',
@@ -93,7 +93,16 @@ export default {
     }
   },
   computed: {
-    ...mapState(['leftDrawer'])
+
+    leftDrawer: {
+      get () {
+        return this.$store.state.leftDrawer
+      },
+      set (value) {
+        return this.$store.commit('SET_LEFT_DRAWER', !true)
+      }
+    }
+
   }
 }
 </script>
