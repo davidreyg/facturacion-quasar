@@ -13,12 +13,12 @@ export default {
   create (payload) {
     // const producto = new Producto(payload)
     // return producto.save()
-    console.log(payload)
+    // console.log(payload)
     return Service.post(`${resource}`, payload)
   },
   update (payload) {
-    const producto = new Producto(payload)
-    producto.save()
+    // console.log(payload)
+    return Service.post(`${resource}/${payload.get('id')}`, payload)
   },
 
   destroy (producto) {

@@ -4,7 +4,7 @@
     ref="observer"
     v-slot="{ passes, invalid }"
   >
-    <form>
+    <form @submit.prevent="passes(actualizarProducto)">
       <div class="row">
         <div class="col col-6 q-px-xs ">
           <ValidationProvider
@@ -179,7 +179,6 @@
               type="submit"
               label="Actualizar"
               :color="invalid ? 'grey' : 'primary'"
-              @click.prevent="passes(actualizarProducto)"
             />
           </div>
           <div class="col-5">
@@ -225,10 +224,23 @@ export default {
     }),
     ...mapActions('producto', ['updateProducto']),
     actualizarProducto () {
-      this.producto.precio_compra = this.$parseCurrency(this.producto.precio_compra)
-      this.producto.precio_venta = this.$parseCurrency(this.producto.precio_venta)
-      this.producto.ganancia = this.$parseCurrency(this.producto.ganancia)
-      return this.updateProducto(this.producto)
+      this.$parseCurrency(this.producto.precio_compra)
+      this.$parseCurrency(this.producto.precio_venta)
+      this.$parseCurrency(this.producto.ganancia)
+      const formData = new FormData()
+      formData.append('id', this.producto.id)
+      formData.append('nombre', this.producto.nombre)
+      formData.append('descripcion', this.producto.descripcion)
+      formData.append('stock', this.producto.stock)
+      formData.append('precio_compra', this.producto.precio_compra)
+      formData.append('precio_venta', this.producto.precio_venta)
+      formData.append('ganancia', this.producto.ganancia)
+      formData.append('moneda', this.producto.moneda)
+      formData.append('categoria_id', this.producto.categoria_id)
+      formData.append('imagen', this.producto.imagen)
+      formData.append('_method', 'PUT')
+
+      return this.updateProducto(formData)
       // alert('asd');
     },
     calcularGanancia () {

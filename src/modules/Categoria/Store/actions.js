@@ -83,7 +83,7 @@ export async function deleteCategoria (context, payload) {
       Notify.create({
         type: 'negative',
         textColor: 'white',
-        message: err.response.data.error
+        message: err.response.data.message
       })
     })
 }

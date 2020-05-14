@@ -250,14 +250,6 @@ export default {
       formData.append('moneda', this.producto.moneda)
       formData.append('categoria_id', this.producto.categoria_id)
       formData.append('imagen', this.producto.imagen)
-      // console.log(this.producto)
-      // this.$axios.post(process.env.BASE_API_URL + '/productos', formData)
-      //   .then(res => {
-      //     console.log(res)
-      //   })
-      //   .catch(err => {
-      //     console.error(err)
-      //   })
       return this.storeProducto(formData)
     },
     calcularGanancia () {

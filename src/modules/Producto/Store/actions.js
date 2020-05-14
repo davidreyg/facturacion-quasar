@@ -1,8 +1,8 @@
 import { Notify } from 'quasar'
-import { RepositoryFactory } from '../../repositories/RepositoryFactory'
-const ProductoRepository = RepositoryFactory.get('productos')
+import { ServiceFactory } from 'core/Services/ServiceFactory'
+const ProductoService = ServiceFactory.get('productos')
 export async function fetchProductos ({ commit }) {
-  await ProductoRepository.get()
+  await ProductoService.get()
     .then(productos => {
       // console.log(Productos.data);
       commit('SET_PRODUCTOS', productos.data)
@@ -17,7 +17,7 @@ export async function fetchProductos ({ commit }) {
 }
 
 export async function fetchOneProducto (context, payload) {
-  await ProductoRepository.getOne(payload)
+  await ProductoService.getOne(payload)
     .then((producto) => {
       // console.log(Producto);
       context.dispatch('openModalEditar', true)
@@ -38,7 +38,7 @@ export function openModalEditar ({ commit }, payload) {
 export async function storeProducto (context, payload) {
   console.log(payload)
 
-  await ProductoRepository.create(payload)
+  await ProductoService.create(payload)
     .then(() => {
       Notify.create({
         position: 'top-right',
@@ -53,7 +53,7 @@ export async function storeProducto (context, payload) {
     })
 }
 export async function updateProducto (context, payload) {
-  await ProductoRepository.update(payload)
+  await ProductoService.update(payload)
     .then(res => {
       // console.log(res)
       Notify.create({
@@ -70,7 +70,7 @@ export async function updateProducto (context, payload) {
     })
 }
 export async function deleteProducto (context, payload) {
-  await ProductoRepository.destroy(payload)
+  await ProductoService.destroy(payload)
     .then(res => {
       // console.log(res)
       Notify.create({

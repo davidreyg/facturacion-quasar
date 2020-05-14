@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import categoria from 'modules/Categoria/Store'
-// import producto from 'modules/Producto/Store'
+import producto from 'modules/Producto/Store'
 
 Vue.use(Vuex)
 
@@ -18,8 +18,8 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      categoria
-      // producto
+      categoria,
+      producto
     },
     state: {
       token: localStorage.getItem('token_API_FACTURACION') || sessionStorage.getItem('token_API_FACTURACION'),

@@ -181,8 +181,6 @@ export default {
     ...mapActions('producto', ['fetchProductos']),
     ...mapActions('producto', ['fetchOneProducto']),
     async cargarProducto (id) {
-      const evt = window.event
-      console.log(evt)
       this.loadingBtnFetch = true
       await this.fetchOneProducto(id)
       this.loadingBtnFetch = false
