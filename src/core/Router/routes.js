@@ -1,6 +1,7 @@
 import store from '../Store'
 import CategoriaRoutes from 'modules/Categoria/Routes'
 import ProductoRoutes from 'modules/Producto/Routes'
+import TiendaRoutes from 'modules/Tienda/Routes'
 const beforeEnter = (to, from, next) => {
   // console.log(store().state)
   if (store().state.token) {
@@ -26,13 +27,7 @@ const routes = [
       ProductoRoutes
     ]
   },
-  {
-    path: '/tienda',
-    name: 'tienda',
-    component: () => import('modules/Tienda/Tienda.vue'),
-    meta: { auth: true, title: 'Comprar Productos' }
-
-  },
+  TiendaRoutes,
   {
     path: '/auth',
     name: 'auth',

@@ -19,7 +19,8 @@ module.exports = function (ctx) {
       'sweetAlert',
       'vueCurrencyInput',
       'vueAuth',
-      'veeValidate'
+      'veeValidate',
+      'accounting'
     ],
 
     sourceFiles: {

@@ -148,29 +148,21 @@
           </ValidationProvider>
         </div>
         <div class="col col-6 q-px-xs ">
-          <ValidationProvider
-            rules="required"
-            name="imagen"
-            v-slot="{ errors, invalid, validated }"
-          >
             <q-file
               v-model="imagen"
               class="q-mb-md"
               color="blue-grey-10"
               label="Imagen (*)"
-              :error="invalid && validated"
-              :error-message="errors[0]"
               @input="mostrarPreImagen"
               clearable
               counter
             />
             <q-img
-              :src="avatar"
+              :src="avatar || 'statics/img/default_product_image.png'"
               :ratio="16/9"
               spinner-color="primary"
               spinner-size="82px"
             />
-          </ValidationProvider>
         </div>
         <div class="row justify-center items-center fit q-gutter-md">
           <div class="col-5">
@@ -239,7 +231,7 @@ export default {
       formData.append('categoria_id', this.producto.categoria_id)
       formData.append('imagen', this.producto.imagen)
       formData.append('_method', 'PUT')
-
+      console.trace('realizando la insercion en la base de datos...')
       return this.updateProducto(formData)
       // alert('asd');
     },

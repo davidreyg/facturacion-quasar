@@ -184,8 +184,8 @@ export default {
         cancelButtonColor: '#d33',
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Si, seguro!'
-      }).then((result) => {
-        if (result.value) {
+      }).then((confirmado) => {
+        if (confirmado.value) {
           this.deleteCategoria(categoria)
         }
       })

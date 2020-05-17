@@ -78,6 +78,19 @@
           </q-item-section>
         </q-item>
       </q-expansion-item>
+      <q-item
+        clickable
+        tag="a"
+        to="tienda"
+      >
+        <q-item-section avatar>
+          <q-icon name="school" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>Tinda</q-item-label>
+          <q-item-label caption>api/categorias</q-item-label>
+        </q-item-section>
+      </q-item>
     </q-list>
   </q-drawer>
 </template>

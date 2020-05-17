@@ -14,6 +14,7 @@
   "dependencies": {
     "@quasar/extras": "^1.6.4",
     "@websanova/vue-auth": "^3.1.2-beta",
+    "accounting": "^0.4.1",
     "axios": "^0.18.1",
     "dinero.js": "^1.8.1",
     "json-form-data": "^1.7.2",
