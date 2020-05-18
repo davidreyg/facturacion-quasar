@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import categoria from 'modules/Categoria/Store'
 import producto from 'modules/Producto/Store'
 import tienda from 'modules/Tienda/Store'
+import carrito from 'modules/Carrito/Store'
 
 Vue.use(Vuex)
 
@@ -21,7 +22,8 @@ export default function (/* { ssrContext } */) {
     modules: {
       categoria,
       producto,
-      tienda
+      tienda,
+      carrito
     },
     state: {
       token: localStorage.getItem('token_API_FACTURACION') || sessionStorage.getItem('token_API_FACTURACION'),

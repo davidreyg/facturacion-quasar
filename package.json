@@ -18,6 +18,7 @@
     "axios": "^0.18.1",
     "dinero.js": "^1.8.1",
     "json-form-data": "^1.7.2",
+    "numeral": "^2.0.6",
     "quasar": "^1.9.14",
     "vee-validate": "^3.3.0",
     "vue-api-query": "^1.5.1",

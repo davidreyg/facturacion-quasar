@@ -75,7 +75,7 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'ProductoDetalleCard',
@@ -85,10 +85,14 @@ export default {
     }
   },
   methods: {
+    ...mapActions('carrito', ['añadirProductoAlCarrito']),
     añadirAlCarrito () {
       const total = this.producto.precio_venta * this.cantidad
-      const t = this.$Dinero({ amount: parseInt(total) }).toFormat()
-      console.log(t)
+      console.log(total)
+      this.añadirProductoAlCarrito({
+        producto: this.producto,
+        cantidad: parseInt(this.cantidad)
+      })
     }
   },
   computed: {

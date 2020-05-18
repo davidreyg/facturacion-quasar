@@ -29,15 +29,8 @@
           <div class="row no-wrap q-pa-md">
             <div class="column">
               <div class="text-h6 q-mb-md">Settings</div>
-              <q-toggle
-                v-model="mobileData"
-                label="Use Mobile Data"
-              />
               <q-input :value="'Administrador'" type="text" label="Tipo" readonly/>
-              <q-toggle
-                v-model="bluetooth"
-                label="Bluetooth"
-              />
+
             </div>
 
             <q-separator

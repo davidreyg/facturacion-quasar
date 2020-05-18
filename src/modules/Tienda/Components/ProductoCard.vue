@@ -86,8 +86,9 @@ export default {
   methods: {
     ...mapActions('tienda', ['verDetallesProducto']),
     verDetalles (idProducto) {
-      this.verDetallesProducto(idProducto)
-      this.open = !this.open
+      this.verDetallesProducto(idProducto).then(() => {
+        this.open = true
+      })
     }
   }
 
