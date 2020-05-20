@@ -83,7 +83,8 @@ module.exports = function (ctx) {
         'QBanner',
         'QSpinner',
         'QFile',
-        'QUploader'
+        'QUploader',
+        'QMarkupTable'
       ],
 
       directives: ['Ripple'],

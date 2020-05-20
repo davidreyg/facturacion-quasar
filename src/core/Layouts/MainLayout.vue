@@ -29,18 +29,6 @@ export default {
       miniState: false
     }
   },
-  methods: {
-    logout () {
-      this.$auth.logout({
-        makeRequest: true,
-        redirect: '/auth/login'
-        // etc...
-      })
-    },
-    refresh () {
-      this.$auth.refresh()
-    }
-  },
   computed: {
     ...mapState(['leftDrawer'])
   }

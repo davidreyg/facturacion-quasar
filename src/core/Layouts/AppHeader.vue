@@ -18,7 +18,6 @@
         </q-avatar>
         Facturacion con Laravel
       </q-toolbar-title>
-
       <q-btn
         dense
         flat
@@ -29,7 +28,12 @@
           <div class="row no-wrap q-pa-md">
             <div class="column">
               <div class="text-h6 q-mb-md">Settings</div>
-              <q-input :value="'Administrador'" type="text" label="Tipo" readonly/>
+              <q-input
+                :value="'Administrador'"
+                type="text"
+                label="Tipo"
+                readonly
+              />
 
             </div>
 

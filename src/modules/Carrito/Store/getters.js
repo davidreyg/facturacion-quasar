@@ -6,7 +6,7 @@ export function getTotalCarrito (state, getters) {
 }
 
 export function getCarrito (state, getters, rootState) {
-  return state.cart.map(item => {
+  return state.carrito.map(item => {
     const product = rootState.tienda.productos.find(
       producto => producto.id === item.id
     )
