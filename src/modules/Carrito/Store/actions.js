@@ -9,3 +9,6 @@ export async function añadirProductoAlCarrito (context, { producto, cantidad })
   }
   // context.commit('decrementProductInventory', { producto, cantidad })
 }
+export async function eliminarProductoDelCarrito (context, productoId) {
+  context.commit('eliminarProductoDelCarrito', productoId)
+}

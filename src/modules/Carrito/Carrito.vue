@@ -1,10 +1,15 @@
 <template>
-  <div>asd</div>
+  <div>
+  <carrito-list></carrito-list>
+  </div>
 </template>
 
 <script>
-export default {
+import CarritoList from './Components/CarritoList'
 
+export default {
+  name: 'Carrito',
+  components: { CarritoList }
 }
 </script>
 

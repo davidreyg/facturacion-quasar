@@ -9,8 +9,8 @@ export function añadirProductoAlCarrito (state, { producto, cantidad }) {
   })
 }
 
-export function eliminarProductoDelCarrito (state, index) {
-  state.carrito.splice(index, 1)
+export function eliminarProductoDelCarrito (state, productoId) {
+  state.carrito.splice(productoId, 1)
 }
 
 export function vaciarCarrito (state) {
