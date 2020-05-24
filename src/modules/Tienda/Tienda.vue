@@ -66,7 +66,9 @@
     </q-header>
 
     <q-page-container>
-      <router-view></router-view>
+      <div class="q-pa-md">
+        <router-view></router-view>
+      </div>
 
     </q-page-container>
   </q-layout>

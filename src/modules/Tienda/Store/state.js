@@ -10,6 +10,7 @@
 export default function () {
   return {
     productos: [],
+    categorias: [],
     producto: {}
   }
 }

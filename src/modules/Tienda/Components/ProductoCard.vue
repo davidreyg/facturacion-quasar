@@ -1,8 +1,7 @@
 <template>
-  <div class="q-pa-md col-4 items-start ">
+  <div class="q-pa-sm col-4 items-start ">
     <q-card
-      class="my-card"
-      bordered
+      class="my-card shadow-24"
     >
       <div
         v-ripple
