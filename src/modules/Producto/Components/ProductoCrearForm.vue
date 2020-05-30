@@ -140,11 +140,16 @@
               class="q-mb-md"
               color="blue-grey-10"
               label="Categoria (*)"
-              :options="categoriaOptions"
+              use-input
+              :options="options"
               :error="invalid && validated"
               :error-message="errors[0]"
+              option-label="nombre"
+              option-value="id"
               emit-value
               map-options
+              clearable
+              @filter="filterFn"
             />
           </ValidationProvider>
         </div>
@@ -217,7 +222,8 @@ export default {
         categoria_id: '',
         imagen: null,
         avatar: null
-      }
+      },
+      options: this.categorias
     }
   },
   methods: {
@@ -254,17 +260,32 @@ export default {
     },
     calcularGanancia () {
       this.producto.ganancia = `S/ ${(this.$parseCurrency(this.producto.precio_compra) - this.$parseCurrency(this.producto.precio_venta)) / 100}`
+    },
+    filterFn (val, update) {
+      if (val === '') {
+        update(() => {
+          this.options = this.categorias
+
+          // with Quasar v1.7.4+
+          // here you have access to "ref" which
+          // is the Vue reference of the QSelect
+        })
+        return
+      }
+
+      update(() => {
+        const needle = val.toLowerCase()
+        // console.log(this.categorias)
+        // this.options = this.getCategorias.filter(v => v.toLowerCase().indexOf(needle) > -1)
+        this.options = this.categorias.filter(categoria =>
+          Object.keys(categoria).some(
+            valor => categoria[valor].toString().toLowerCase().includes(needle)))
+      })
     }
 
   },
   computed: {
-    ...mapGetters('categoria', ['getCategorias']),
-    categoriaOptions () {
-      return this.getCategorias.map((categoria) => ({
-        label: categoria.nombre,
-        value: categoria.id
-      }))
-    }
+    ...mapGetters('categoria', { categorias: 'getCategorias' })
   }
 }
 </script>

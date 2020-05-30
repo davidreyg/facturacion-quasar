@@ -108,7 +108,7 @@ module.exports = function (ctx) {
         }
         : {
           // and on build (production):
-          BASE_API_URL: JSON.stringify('https://facturacion26042020.herokuapp.com/api/v1')
+          BASE_API_URL: JSON.stringify('https://facturaciondingo.herokuapp.com/api')
         },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
@@ -147,7 +147,7 @@ module.exports = function (ctx) {
     devServer: {
       https: false,
       port: 8081,
-      open: true // opens browser window automatically
+      open: false // opens browser window automatically
     },
 
     // animations: 'all', // --- includes all animations
