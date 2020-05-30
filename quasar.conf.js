@@ -8,7 +8,7 @@
 /* eslint-env node */
 const path = require('path')
 module.exports = function (ctx) {
-  console.log(ctx)
+  // console.log(ctx)
   return {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"

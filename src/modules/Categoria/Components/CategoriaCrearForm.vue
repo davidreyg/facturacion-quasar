@@ -6,7 +6,7 @@
     </q-card-section>
 
     <q-separator />
-    <q-card-section class="collumn col-12 full-width">
+    <q-card-section class="col-12 full-width">
 
       <ValidationObserver
         ref="observer"

@@ -138,31 +138,44 @@
               class="q-mb-md"
               color="blue-grey-10"
               label="Categoria (*)"
+              use-input
+              hide-selected
+              fill-input
               :options="categoriaOptions"
               :error="invalid && validated"
               :error-message="errors[0]"
-              option-value="categoria_id"
+              option-label="nombre"
+              option-value="id"
               emit-value
               map-options
-            />
+              clearable
+              @filter="filterFn"
+            >
+              <template v-slot:no-option>
+                <q-item>
+                  <q-item-section class="text-grey">
+                    No hay resultados
+                  </q-item-section>
+                </q-item>
+              </template></q-select>
           </ValidationProvider>
         </div>
         <div class="col col-6 q-px-xs ">
-            <q-file
-              v-model="imagen"
-              class="q-mb-md"
-              color="blue-grey-10"
-              label="Imagen (*)"
-              @input="mostrarPreImagen"
-              clearable
-              counter
-            />
-            <q-img
-              :src="avatar || 'statics/img/default_product_image.png'"
-              :ratio="16/9"
-              spinner-color="primary"
-              spinner-size="82px"
-            />
+          <q-file
+            v-model="imagen"
+            class="q-mb-md"
+            color="blue-grey-10"
+            label="Imagen (*)"
+            @input="mostrarPreImagen"
+            clearable
+            counter
+          />
+          <q-img
+            :src="avatar || 'statics/img/default_product_image.png'"
+            :ratio="16/9"
+            spinner-color="primary"
+            spinner-size="82px"
+          />
         </div>
         <div class="row justify-center items-center fit q-gutter-md">
           <div class="col-5">
@@ -203,18 +216,23 @@ export default {
   components: { ValidationObserver },
   data () {
     return {
-      avatar: null
+      avatar: null,
+      categoriaOptions: null
     }
   },
   created () {
     // this.producto.ganancia = `S/ ${this.producto.ganancia / 100}`}
+    this.categoriaOptions = this.categorias
     this.avatar = this.producto.imagen_url
   },
   methods: {
     ...mapActions('producto', {
       cerrarModal: 'openModalEditar'
     }),
-    ...mapActions('producto', ['updateProducto']),
+    ...mapActions('producto', {
+      actualizar: 'updateProducto',
+      vaciarProductoSeleccionado: 'emptyProductoSleccionado'
+    }),
     actualizarProducto () {
       this.$parseCurrency(this.producto.precio_compra)
       this.$parseCurrency(this.producto.precio_venta)
@@ -232,7 +250,14 @@ export default {
       formData.append('imagen', this.producto.imagen)
       formData.append('_method', 'PUT')
       console.trace('realizando la insercion en la base de datos...')
-      return this.updateProducto(formData)
+      return this.actualizar(formData).then(() => {
+        this.$q.notify({
+          type: 'positive',
+          position: 'top-right',
+          message: `Producto ${this.producto.nombre} actualizado correctamente .`
+        })
+        this.vaciarProductoSeleccionado()
+      })
       // alert('asd');
     },
     calcularGanancia () {
@@ -247,11 +272,32 @@ export default {
           this.avatar = e.target.result
         }
       }
+    },
+    filterFn (val, update) {
+      if (val === '') {
+        update(() => {
+          this.categoriaOptions = this.categorias
+
+          // with Quasar v1.7.4+
+          // here you have access to "ref" which
+          // is the Vue reference of the QSelect
+        })
+        return
+      }
+
+      update(() => {
+        const needle = val.toLowerCase()
+        // console.log(this.categorias)
+        // this.options = this.getCategorias.filter(v => v.toLowerCase().indexOf(needle) > -1)
+        this.categoriaOptions = this.categorias.filter(categoria =>
+          Object.keys(categoria).some(
+            valor => categoria[valor].toString().toLowerCase().includes(needle)))
+      })
     }
   },
   computed: {
     ...mapGetters('producto', { producto: 'getProducto' }),
-    ...mapGetters('categoria', ['getCategorias']),
+    ...mapGetters('categoria', { categorias: 'getCategorias' }),
     ...mapFields([
       'nombre',
       'descripcion',
@@ -262,18 +308,7 @@ export default {
       'moneda',
       'categoria_id',
       'imagen'
-    ]),
-
-    categoriaOptions () {
-      // let productoSeleccionado = this.producto;
-      let options = {}
-
-      // let self = this;
-      return this.getCategorias.map(function (categoria) {
-        options = { label: categoria.nombre, categoria_id: categoria.id }
-        return options
-      })
-    }
+    ])
   }
 }
 </script>

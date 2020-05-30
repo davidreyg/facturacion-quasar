@@ -1,4 +1,4 @@
-import { Notify } from 'quasar'
+
 import { ServiceFactory } from 'core/Services/ServiceFactory'
 const CategoriaService = ServiceFactory.get('categorias')
 export async function fetchCategorias ({ commit }) {
@@ -6,10 +6,6 @@ export async function fetchCategorias ({ commit }) {
     .then(categorias => {
       // console.log(categorias.data);
       commit('SET_CATEGORIAS', categorias.data)
-      // Notify.create({
-      //   type: 'positive',
-      //   message: 'La lista de categorias fueron mostradas correctamente.'
-      // })
     })
     .catch(err => {
       console.error(err)
@@ -38,11 +34,6 @@ export function openModalEditar ({ commit }, payload) {
 export async function storeCategoria (context, payload) {
   await CategoriaService.create(payload)
     .then(() => {
-      Notify.create({
-        position: 'top-right',
-        textColor: 'white',
-        message: 'Creado.'
-      })
       context.dispatch('fetchCategorias')
       context.dispatch('openModalCrear', false)
     })
@@ -54,11 +45,6 @@ export async function updateCategoria (context, payload) {
   await CategoriaService.update(payload)
     .then(res => {
       // console.log(res)
-      Notify.create({
-        position: 'top-right',
-        textColor: 'white',
-        message: 'Actualizado.'
-      })
       context.dispatch('fetchCategorias')
       context.dispatch('openModalEditar', false)
       context.commit('SET_CATEGORIA', {})
@@ -71,19 +57,7 @@ export async function deleteCategoria (context, payload) {
   await CategoriaService.destroy(payload)
     .then(res => {
       // console.log(res)
-      Notify.create({
-        position: 'bottom-right',
-        textColor: 'white',
-        message: 'Categoria eliminada correctamente.'
-      })
+
       context.dispatch('fetchCategorias')
-    })
-    .catch(err => {
-      // console.error(err.response)
-      Notify.create({
-        type: 'negative',
-        textColor: 'white',
-        message: err.response.data.message
-      })
     })
 }

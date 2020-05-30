@@ -1,9 +1,29 @@
 <template>
-  <ValidationObserver
-    ref="observer"
-    v-slot="{ passes, invalid }"
-  >
+  <ValidationObserver ref="observer">
+
     <form @submit.prevent="crearProducto">
+      <!-- <div
+        class="row"
+        v-show="failed"
+      >
+        <div class="col-12">
+          <q-banner
+            inline-actions
+            class="text-white bg-red"
+          >
+            <q-list>
+              <q-item
+                dense
+                v-ripple
+                v-for="(error,index) in Object.values(errors).flat()"
+                :key="index"
+              >
+                <q-item-section>{{error}}</q-item-section>
+              </q-item>
+            </q-list>
+          </q-banner>
+        </div>
+      </div> -->
       <div class="row">
         <div class="col col-6 q-px-xs ">
           <ValidationProvider
@@ -141,7 +161,7 @@
               color="blue-grey-10"
               label="Categoria (*)"
               use-input
-              :options="options"
+              :options="categoriaOptions"
               :error="invalid && validated"
               :error-message="errors[0]"
               option-label="nombre"
@@ -150,7 +170,13 @@
               map-options
               clearable
               @filter="filterFn"
-            />
+            > <template v-slot:no-option>
+                <q-item>
+                  <q-item-section class="text-grey">
+                    No hay resultados
+                  </q-item-section>
+                </q-item>
+              </template></q-select>
           </ValidationProvider>
         </div>
         <div class="col col-6 q-px-xs ">
@@ -183,7 +209,7 @@
             <q-btn
               class="q-mt-md full-width"
               type="submit"
-              :color="invalid ? 'grey' : 'primary'"
+              color="primary"
               label="Crear"
             />
           </div>
@@ -223,12 +249,13 @@ export default {
         imagen: null,
         avatar: null
       },
-      options: this.categorias
+      categoriaOptions: this.categorias
     }
   },
   methods: {
     ...mapActions('producto', {
-      cerrarModal: 'openModalCrear'
+      cerrarModal: 'openModalCrear',
+      storeProducto: 'storeProducto'
     }),
     mostrarPreImagen (e) {
       this.producto.avatar = null
@@ -240,23 +267,37 @@ export default {
         }
       }
     },
-    ...mapActions('producto', ['storeProducto']),
-    crearProducto () {
-      this.producto.precio_compra = this.$parseCurrency(this.producto.precio_compra)
-      this.producto.precio_venta = this.$parseCurrency(this.producto.precio_venta)
-      this.producto.ganancia = this.$parseCurrency(this.producto.ganancia)
+    async crearProducto () {
+      const isValid = await this.$refs.observer.validate()
+      if (isValid) {
+        this.producto.precio_compra = this.$parseCurrency(this.producto.precio_compra)
+        this.producto.precio_venta = this.$parseCurrency(this.producto.precio_venta)
+        this.producto.ganancia = this.$parseCurrency(this.producto.ganancia)
 
-      const formData = new FormData()
-      formData.append('nombre', this.producto.nombre)
-      formData.append('descripcion', this.producto.descripcion)
-      formData.append('stock', this.producto.stock)
-      formData.append('precio_compra', this.producto.precio_compra)
-      formData.append('precio_venta', this.producto.precio_venta)
-      formData.append('ganancia', this.producto.ganancia)
-      formData.append('moneda', this.producto.moneda)
-      formData.append('categoria_id', this.producto.categoria_id)
-      formData.append('imagen', this.producto.imagen)
-      return this.storeProducto(formData)
+        const formData = new FormData()
+        formData.append('nombre', this.producto.nombre)
+        formData.append('descripcion', this.producto.descripcion)
+        formData.append('stock', this.producto.stock)
+        formData.append('precio_compra', this.producto.precio_compra)
+        formData.append('precio_venta', this.producto.precio_venta)
+        formData.append('ganancia', this.producto.ganancia)
+        formData.append('moneda', this.producto.moneda)
+        formData.append('categoria_id', this.producto.categoria_id)
+        formData.append('imagen', this.producto.imagen)
+        return this.storeProducto(formData).then(() => {
+          this.$q.notify({
+            type: 'positive',
+            position: 'top-right',
+            message: 'Producto creado correctamente.'
+          })
+        })
+      } else {
+        this.$q.notify({
+          type: 'negative',
+          position: 'top-right',
+          message: 'Por favor rellene los campos obligatorios.'
+        })
+      }
     },
     calcularGanancia () {
       this.producto.ganancia = `S/ ${(this.$parseCurrency(this.producto.precio_compra) - this.$parseCurrency(this.producto.precio_venta)) / 100}`
@@ -264,7 +305,7 @@ export default {
     filterFn (val, update) {
       if (val === '') {
         update(() => {
-          this.options = this.categorias
+          this.categoriaOptions = this.categorias
 
           // with Quasar v1.7.4+
           // here you have access to "ref" which
@@ -277,7 +318,7 @@ export default {
         const needle = val.toLowerCase()
         // console.log(this.categorias)
         // this.options = this.getCategorias.filter(v => v.toLowerCase().indexOf(needle) > -1)
-        this.options = this.categorias.filter(categoria =>
+        this.categoriaOptions = this.categorias.filter(categoria =>
           Object.keys(categoria).some(
             valor => categoria[valor].toString().toLowerCase().includes(needle)))
       })

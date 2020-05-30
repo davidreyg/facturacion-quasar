@@ -16,8 +16,8 @@ export async function fetchProductos ({ commit }) {
     })
 }
 
-export async function fetchOneProducto (context, payload) {
-  await ProductoService.getOne(payload)
+export async function fetchOneProducto (context, producto) {
+  await ProductoService.getOne(producto)
     .then((producto) => {
       // console.log(Producto);
       context.dispatch('openModalEditar', true)
@@ -28,17 +28,17 @@ export async function fetchOneProducto (context, payload) {
     })
 }
 
-export function openModalCrear ({ commit }, payload) {
-  commit('SET_MODAL_CREAR_ABIERTO', payload)
+export function openModalCrear ({ commit }, producto) {
+  commit('SET_MODAL_CREAR_ABIERTO', producto)
 }
-export function openModalEditar ({ commit }, payload) {
-  commit('SET_MODAL_EDITAR_ABIERTO', payload)
+export function openModalEditar ({ commit }, producto) {
+  commit('SET_MODAL_EDITAR_ABIERTO', producto)
 }
 
-export async function storeProducto (context, payload) {
-  console.log(payload)
+export async function storeProducto (context, producto) {
+  console.log(producto)
 
-  await ProductoService.create(payload)
+  await ProductoService.create(producto)
     .then(() => {
       Notify.create({
         position: 'top-right',
@@ -52,40 +52,24 @@ export async function storeProducto (context, payload) {
       console.error(err)
     })
 }
-export async function updateProducto (context, payload) {
-  await ProductoService.update(payload)
+export async function updateProducto (context, producto) {
+  await ProductoService.update(producto)
     .then(res => {
       // console.log(res)
-      Notify.create({
-        position: 'top-right',
-        textColor: 'white',
-        message: 'Actualizado.'
-      })
       context.dispatch('fetchProductos')
       context.dispatch('openModalEditar', false)
-      context.commit('SET_PRODUCTO', {})
     })
     .catch(err => {
       console.error(err)
     })
 }
-export async function deleteProducto (context, payload) {
-  await ProductoService.destroy(payload)
+export async function deleteProducto (context, producto) {
+  await ProductoService.destroy(producto)
     .then(res => {
       // console.log(res)
-      Notify.create({
-        position: 'bottom-right',
-        textColor: 'white',
-        message: 'Producto eliminada correctamente.'
-      })
       context.dispatch('fetchProductos')
     })
-    .catch(err => {
-      // console.error(err.response)
-      Notify.create({
-        type: 'negative',
-        textColor: 'white',
-        message: err.response.data.error
-      })
-    })
+}
+export async function emptyProductoSleccionado (context) {
+  context.commit('SET_PRODUCTO', {})
 }
