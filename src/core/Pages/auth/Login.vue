@@ -31,8 +31,8 @@
                   label="Contraseña *"
                   lazy-rules
                   :rules="[
-                                    val => val !== null && val !== '' || 'Porfavor ingresa tu contraseña'
-                                    ]"
+                    val => val !== null && val !== '' || 'Porfavor ingresa tu contraseña'
+                    ]"
                 />
                 <div>
                   <q-btn
@@ -108,6 +108,6 @@ export default {
 
 <style lang="sass" scoped>
 .my-card
-    width: 100%
-    max-width: 500px
+  width: 100%
+  max-width: 500px
 </style>
